@@ -1,0 +1,12 @@
+Current status: <br>
+Logged in: {{loggedIn}} <br>
+As type: {{type}}
+
+<span>
+  <h2>Login as...</h2>
+  <button (click)="loginSuccess('admin')">Admin</button>
+  <button (click)="loginSuccess('customer')">Customer</button>
+  <button (click)="loginSuccess('loanOfficer')">LoanOfficer</button>
+  <button (click)="loginSuccess('inspectionOfficer')">InspectionOfficer</button>
+</span>
+
