@@ -40,14 +40,6 @@ public class Loan {
 		this.loanId = loanId;
 	}
 
-	public Customer getCust() {
-		return cust;
-	}
-
-	public void setCust(Customer cust) {
-		this.cust = cust;
-	}
-
 	public double getAskedAmount() {
 		return askedAmount;
 	}
@@ -102,6 +94,14 @@ public class Loan {
 
 	public void setRep(Report rep) {
 		this.rep = rep;
+	}
+
+	public Customer getCust() {
+		return cust;
+	}
+
+	public void setCust(Customer cust) {
+		this.cust = cust;
 	}
 	
 	

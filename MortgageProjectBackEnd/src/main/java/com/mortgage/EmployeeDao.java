@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.mortgage.model.Customer;
 import com.mortgage.model.Employee;
 
 @Repository
@@ -44,5 +45,42 @@ public class EmployeeDao {
 			eList = null;
 		}
 		return eList;
+	}
+	
+	public int changeActiveFalse(int eid)
+	{
+		int ret = 1;
+		try {
+			jdbc.execute("update mortgageemployee set active = 0 where eid = " + eid);
+		}catch(Exception e)
+		{
+			ret = -1;
+		}
+		return ret;
+	}
+	
+	public int changeActiveTrue(int eid)
+	{
+		int ret = 1;
+		try {
+			jdbc.execute("update mortgageemployee set active = 1 where eid = " + eid);
+		}catch(Exception e)
+		{
+			ret = -1;
+		}
+		return ret;
+	}
+	
+	public int createEmployee(Employee e)
+	{
+		int ret = 1;
+		try {
+			jdbc.execute("insert into mortgageuser values ( '" + e.getUsername() + "', '" + e.getPassword() + "', 'employee')");
+			jdbc.execute("insert into mortgageemployee values (1, mortemp_seq.nextval, '" + e.getFname() + "', '" + e.getLname() + "', '" + e.getRole() + "', '" + e.getUsername() + "')");
+		}catch(Exception ex)
+		{
+			ret = -1;
+		}
+		return ret;
 	}
 }

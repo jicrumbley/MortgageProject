@@ -15,7 +15,7 @@ public class Loan {
 	private Report rep;
 	
 	@OneToOne
-	@JoinColumn(name="ssn")
+	@JoinColumn(name="ssn", referencedColumnName = "ssn")
 	private Customer cust;
 	
 	private double askedAmount;
