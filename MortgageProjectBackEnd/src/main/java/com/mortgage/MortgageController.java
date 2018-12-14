@@ -47,11 +47,33 @@ public class MortgageController {
 	}
 	
 	//Employee Request Mappings
+	
 	@GetMapping("/getAllEmployees")
 	@ResponseBody
 	public List<Employee> getEmployees()
 	{
 		return ed.getAllEmployees();
+	}
+	
+	@PostMapping("/createEmployee")
+	@ResponseBody
+	public int createEmployee(@RequestBody Employee e)
+	{
+		return ed.createEmployee(e);
+	}
+	
+	@PostMapping("/activeFalse")
+	@ResponseBody
+	public int setActiveFalse(@RequestBody Employee e)
+	{
+		return ed.changeActiveFalse(e.getEid());
+	}
+	
+	@PostMapping("/activeTrue")
+	@ResponseBody
+	public int setActiveTrue(@RequestBody Employee e)
+	{
+		return ed.changeActiveTrue(e.getEid());
 	}
 	
 	//User Request Mappings
