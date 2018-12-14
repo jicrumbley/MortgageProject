@@ -5,6 +5,11 @@ Logged in: {{loggedIn}} <br>
 As type: {{type}}<br>
 <button data-toggle="modal" data-target="#logoutModal">Log out</button>
 
+<button class="button" (click)=getAllCustomers()>Get All Customers</button>
+Customers:
+
+<pre>{{customers | json}}</pre>
+
 <!-- Modal -->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -20,7 +25,7 @@ As type: {{type}}<br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Nevermind</button>
-        <button type="button" class="btn btn-danger" (click)=logout()  data-dismiss="modal">Logout</button>
+        <button type="button" class="btn btn-danger" (click)=logout() data-dismiss="modal">Logout</button>
       </div>
     </div>
   </div>

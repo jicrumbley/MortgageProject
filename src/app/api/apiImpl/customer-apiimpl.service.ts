@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CustomerAPI } from '../apiInterfaces/customerAPI';
 import { Customer } from 'src/app/Models/Customer';
 import { ApiService } from '../api.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 // import 'rxjs/add/operator/map';
@@ -17,10 +17,10 @@ export class CustomerAPIImplService implements CustomerAPI {
   constructor(private http: HttpClient) { }
 
   getCustomerUrl = 'http://localhost:' + ApiService.port + '/...';
-  addCustomerUrl = 'http://localhost:' + ApiService.port + '/...';
+  addCustomerUrl = 'http://localhost:' + ApiService.port + '/register';
   deleteCustomerUrl = 'http://localhost:' + ApiService.port + '/...';
   updateCustomerUrl = 'http://localhost:' + ApiService.port + '/...';
-  getAllCustomersUrl = 'http://localhost:' + ApiService.port + '/...';
+  getAllCustomersUrl = 'http://localhost:' + ApiService.port + '/getAllCustomers';
 
 
   //  // CUSTOMER
@@ -45,33 +45,45 @@ export class CustomerAPIImplService implements CustomerAPI {
   //     .set('Content-Type', 'application/json');
   //   return this.http.post('/api/contacts/delete', JSON.stringify(contact), { headers }).subscribe();
   // }
-  getAllCustomers(): Observable<Customer[]> {
-    return this.http.get(this.getAllCustomersUrl).pipe(map(res => res as Customer[]));
-    // .map(item => {
-    //   return new Customer(
-    //     item.username,
-    //     item.password,
-    //     item.ssn,
-    //     item.fname,
-    //     item.lname,
-    //     item.date,
-    //     item.phone
-    //   );
-    // });
 
-    // subscribe(data => { this.notes = data; });
+  getAllCustomers(): Customer[] {
+    let list: Customer[] = [];
+    try {
+      // console.log('origin: ' + JSON.stringify((res as Customer[]))
+      this.http.get(this.getAllCustomersUrl).subscribe((res: any) => {
+        for (let index = 0; index < res.length; index++) {
+          list.push(new Customer(res[index]));
+        }
+      });
+      console.log('list: ' + list);
+    } catch (error) {
+      console.log(error);
+    }
+    return list;
+
   }
 
+  // NOT USED
   getCustomer(customer: Customer): Customer {
-    return null;
+    this.http.get(this.getAllCustomersUrl).subscribe((res: any) => { customer = res; });
+    return customer;
   }
+
+  // register
   addCustomer(customer: Customer): number {
-    return null;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    this.http.post(this.addCustomerUrl, JSON.stringify(customer), { headers }).subscribe();
+    return 1;
   }
+  // delete
   deleteCustomer(customer: Customer): number {
-    return null;
-  }
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    this.http.post(this.addCustomerUrl, JSON.stringify(customer), { headers }).subscribe();
+    return 1;
+    }
+
   updateCustomer(customer: Customer): number {
     return null;
   }
+  
 }

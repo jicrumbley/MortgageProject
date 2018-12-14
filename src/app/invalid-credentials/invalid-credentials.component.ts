@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class InvalidCredentialsComponent implements OnInit {
 
   interval;
-  timeLeft = 4;
+  timeLeft = 1;
   constructor(private router: Router) { }
 
   ngOnInit() {

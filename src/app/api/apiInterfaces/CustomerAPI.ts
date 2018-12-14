@@ -8,7 +8,7 @@ export interface CustomerAPI {
     updateCustomerUrl: string;
     getAllCustomersUrl: string;
 
-    getAllCustomers(): Observable<Customer[]>;
+    getAllCustomers(): Customer[];
     getCustomer(customer: Customer): Customer;
     addCustomer(customer: Customer): number;
     deleteCustomer(customer: Customer): number;

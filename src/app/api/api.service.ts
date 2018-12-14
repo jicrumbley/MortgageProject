@@ -19,7 +19,7 @@ import 'rxjs/add/operator/catch';
   providedIn: 'root'
 })
 export class ApiService {
-  static port = 8080;
+  static port = 8090;
 
   constructor(private http: HttpClient, private customerService: CustomerAPIImplService,
     private employeeService: EmployeeAPIImplService, private loanService: LoanAPIImplService,
@@ -34,7 +34,8 @@ export class ApiService {
   // }
 
   // CUSTOMER
-  getAllCustomers(): Customer[] {
+  getAllCustomers() {
+    console.log(this.customerService.getAllCustomers());
     return this.customerService.getAllCustomers();
   }
   getCustomer(customer: Customer): Customer {

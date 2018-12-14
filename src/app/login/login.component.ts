@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ApiService } from '../api/api.service';
+import { Customer } from '../Models/Customer';
 
 
 @Component({
@@ -22,6 +24,7 @@ export class LoginComponent implements OnInit {
   registerForm = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
+    passwordConfirm: new FormControl(''),
     ssn: new FormControl(''),
     fname: new FormControl(''),
     lname: new FormControl(''),
@@ -38,7 +41,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  constructor(private router: Router, private service: LoginService) { }
+  constructor(private router: Router, private service: LoginService, private api: ApiService) { }
 
   ngOnInit() {
   }
@@ -53,13 +56,37 @@ export class LoginComponent implements OnInit {
     this._loggedIn = this.service.logIn(type, this.router);
   }
 
-  onSubmit() {
+  onLoginSubmit() {
     console.log(this.loginForm.value);
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
-    // check if login is correct
-    // const myType = get type from db
-    // this.loginSuccess(type);
   }
 
+  passwordCheck(): boolean {
+    if (this.registerForm.value.password === this.registerForm.value.passwordConfirm) {
+      return true;
+    }
+    else return false;
+  }
+
+  onRegisterSubmit() {
+    // register
+    const newCustomer = new Customer({
+      "username": this.registerForm.value.username,
+      "password": this.registerForm.value.password,
+      "ssn": this.registerForm.value.ssn,
+      "fname": this.registerForm.value.fname,
+      "lname": this.registerForm.value.lname,
+      "dob": this.registerForm.value.dob,
+      "phone": this.registerForm.value.phone
+    })
+
+    this.api.addCustomer(newCustomer);
+
+  }
+  // check if login is correct
+  // const myType = get type from db
+  // this.loginSuccess(type);
 }
+
+
