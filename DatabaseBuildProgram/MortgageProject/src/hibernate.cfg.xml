@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.password">hr</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost</property>
+        <property name="hibernate.connection.username">hr</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="show_sql">true</property>
+        
+        <mapping class="com.digi.model.User"/>
+        <mapping class="com.digi.model.Customer"/>
+        <mapping class="com.digi.model.Employee"/>
+        <mapping class="com.digi.model.Report"/>
+        <mapping class="com.digi.model.Loan"/>
+        
+    </session-factory>
+</hibernate-configuration>
