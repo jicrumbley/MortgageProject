@@ -23,6 +23,9 @@ public class MortgageController {
 	@Autowired
 	EmployeeDao ed;
 	
+	@Autowired
+	LoanDao ld;
+	
 	//Customer Request Mappings
 	
 	@PostMapping("/register")
@@ -44,6 +47,13 @@ public class MortgageController {
 	public List<Customer> getCustomers()
 	{
 		return cd.getAllCustomers();
+	}
+	
+	@GetMapping("/getCustBySsn")
+	@ResponseBody
+	public Customer getCustBySsn()
+	{
+		return cd.getCustomerBySsn(234432345);
 	}
 	
 	//Employee Request Mappings
@@ -83,5 +93,13 @@ public class MortgageController {
 	public String login(@RequestBody User u)
 	{
 		return ud.loginCheck(u);
+	}
+	
+	//Loan Request Mappings
+	@GetMapping("/getAllLoans")
+	@ResponseBody
+	public List<Loan> getAllLoans()
+	{
+		return ld.getAllLoans();
 	}
 }

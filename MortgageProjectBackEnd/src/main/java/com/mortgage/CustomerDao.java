@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import com.mortgage.model.Customer;
@@ -20,6 +21,27 @@ public class CustomerDao {
 	public CustomerDao()
 	{
 		
+	}
+	
+	public Customer getCustomerBySsn(int ssn)
+	{
+		Customer c = null;
+		try {
+			SqlRowSet rs = jdbc.queryForRowSet("select * from mortgagecustomer where ssn = " + ssn);
+			c = new Customer();
+			rs.first();
+			c.setDob(rs.getString(1));
+			c.setEmail(rs.getString(2));
+			c.setFname(rs.getString(3));
+			c.setLname(rs.getString(4));
+			c.setPhone(rs.getString(5));
+			c.setSsn(rs.getInt(6));
+			c.setUsername(rs.getString(7));
+		}catch(Exception e)
+		{
+			c = null;
+		}
+		return c;
 	}
 	
 	public List<Customer> getAllCustomers()
