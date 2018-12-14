@@ -1,3 +1,33 @@
+<style>
+  .my-flex-container {
+          /* border: 2px solid green; */
+          /* height: 700px;
+          width: 50%; */
+          /* margin-right: 10%;; */
+        }
+  
+        .container {
+          flex-wrap: wrap;
+        }
+      
+        .my-flex-container-row {
+          /* border: 2px solid green; */
+          height: 100%;
+          width: 100%;
+          padding: 20px;
+        }
+      
+         .my-flex-item {
+          height: 100%; 
+           /* border: darkgray 1px solid;  */
+           /* background-color: lightgrey;  */
+           height: 1000px; 
+           width: 1000px;
+           margin: 5%;
+  
+        } 
+    </style>
+
 <h1>
   loan-officer works!
 </h1>
@@ -6,7 +36,66 @@ Logged in: {{loggedIn}} <br>
 As type: {{type}}<br>
 <button data-toggle="modal" data-target="#logoutModal">Log out</button>
 
+
+
+
+<div class="container">
+  <div class="d-flex flex-row justify-content-between my-flex-container">
+    <div class="p-2 my-flex-item" style="width: 50%">
+
+      <h1>All reports: </h1>
+
+      <br>
+
+      <!-- Contact list and search -->
+      <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let report of reports" style='border-top: 1px dotted gray;'>
+          <h4 matLine><b>Report {{ report.loanId }}</b></h4>
+          <p matLine class="demo-2">Inspection Officer: {{report.inspectionOfficerId}}
+            <!-- View Report trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewReportModalLong" (click)=tempReportStore(report)>
+              View Report
+            </button>
+          </p>
+        </mat-list-item>
+      </mat-list>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 <!-- Modal -->
+<div class="modal fade" id="viewReportModalLong" tabindex="-1" role="dialog" aria-labelledby="viewReportModalLong"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewReportModalLong">Report</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...insert report data here...
+        {{tempReport.reportData}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Reject</button>
+        <button type="button" class="btn btn-success"  data-dismiss="modal">Approve</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Log Out Modal -->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -21,7 +110,7 @@ As type: {{type}}<br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Nevermind</button>
-        <button type="button" class="btn btn-danger" (click)=logout()  data-dismiss="modal">Logout</button>
+        <button type="button" class="btn btn-danger" (click)=logout() data-dismiss="modal">Logout</button>
       </div>
     </div>
   </div>
