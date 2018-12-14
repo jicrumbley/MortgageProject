@@ -1,3 +1,6 @@
 export class Employee {
-    eid: string;
+    eid: number;
+    role: string;
+    fname: string;
+    lname: string;
 }

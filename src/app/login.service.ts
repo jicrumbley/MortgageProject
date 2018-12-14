@@ -29,7 +29,7 @@ export class LoginService {
   logOut(router: Router) {
     this._loggedIn = false;
     this.type = null;
-    router.navigateByUrl('login');
+    router.navigateByUrl('/');
   }
 
 }

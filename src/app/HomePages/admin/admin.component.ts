@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/login.service';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/api/api.service';
 
 @Component({
   selector: 'app-admin',
@@ -12,22 +13,24 @@ export class AdminComponent implements OnInit {
   _type: string;
 
   get loggedIn(): boolean {
-    return this.service._loggedIn;
+    return this.loginService._loggedIn;
   }
 
   get type(): string {
-    return this.service.type;
+    return this.loginService.type;
   }
-  constructor(private service: LoginService, private router: Router) {  if (this.service.type !== 'admin') {
-    this.router.navigateByUrl('/invalidCredentials');
-  }}
+  constructor(private loginService: LoginService, private router: Router, private api: ApiService) {
+    if (this.loginService.type !== 'admin') {
+      this.router.navigateByUrl('/invalidCredentials');
+    }
+  }
 
   ngOnInit() {
 
   }
 
   logout() {
-    this.service.logOut(this.router);
+    this.loginService.logOut(this.router);
   }
 
 }

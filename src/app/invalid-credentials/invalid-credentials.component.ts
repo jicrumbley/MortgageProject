@@ -22,7 +22,7 @@ export class InvalidCredentialsComponent implements OnInit {
         this.timeLeft--;
       } else if (this.timeLeft === 0 ) {
         console.log('redirecting to login...');
-        this.router.navigateByUrl('login');
+        this.router.navigateByUrl('/');
         clearInterval(this.interval);
       }
     }, 1000);

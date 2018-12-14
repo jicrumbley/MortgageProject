@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
     username: new FormControl(''),
     password: new FormControl(''),
     ssn: new FormControl(''),
+    fname: new FormControl(''),
+    lname: new FormControl(''),
     datePicker: new FormControl(''),
     phone: new FormControl(''),
   });

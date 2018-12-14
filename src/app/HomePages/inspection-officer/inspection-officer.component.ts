@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/login.service';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/api/api.service';
 
 @Component({
   selector: 'app-inspection-officer',
@@ -12,20 +13,20 @@ export class InspectionOfficerComponent implements OnInit {
   _type: string;
 
   get loggedIn(): boolean {
-    return this.service._loggedIn;
+    return this.loginService._loggedIn;
   }
 
   get type(): string {
-    return this.service.type;
+    return this.loginService.type;
   }
-  constructor(private service: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router, private api: ApiService) { }
 
   ngOnInit() {
-    if (this.service.type !== 'inspectionOfficer') {
+    if (this.loginService.type !== 'inspectionOfficer') {
       this.router.navigateByUrl('/invalidCredentials');
     }
   }
   logout() {
-    this.service.logOut(this.router);
+    this.loginService.logOut(this.router);
   }
 }

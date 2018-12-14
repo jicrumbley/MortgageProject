@@ -9,10 +9,16 @@ import { LoanOfficerComponent } from './HomePages/loan-officer/loan-officer.comp
 import { InspectionOfficerComponent } from './HomePages/inspection-officer/inspection-officer.component';
 import { LoginService } from './login.service';
 import { InvalidCredentialsComponent } from './invalid-credentials/invalid-credentials.component';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ApiService } from './api/api.service';
+import { CustomerAPIImplService } from './api/apiImpl/customer-apiimpl.service';
+import { EmployeeAPIImplService } from './api/apiImpl/employee-apiimpl.service';
+import { LoanAPIImplService } from './api/apiImpl/loan-apiimpl.service';
+import { ReportAPIImplService } from './api/apiImpl/report-apiimpl.service';
+import {HttpClientModule} from '@angular/common/http';
 
 
 
@@ -34,8 +40,10 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
-    BrowserAnimationsModule,  ],
-  providers: [LoginService],
+    BrowserAnimationsModule,
+    HttpClientModule
+  ],
+  providers: [LoginService, ApiService, CustomerAPIImplService, EmployeeAPIImplService, LoanAPIImplService, ReportAPIImplService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

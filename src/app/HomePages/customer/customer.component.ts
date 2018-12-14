@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/login.service';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/api/api.service';
 
 @Component({
   selector: 'app-customer',
@@ -12,21 +13,21 @@ export class CustomerComponent implements OnInit {
   _type: string;
 
   get loggedIn(): boolean {
-    return this.service._loggedIn;
+    return this.loginService._loggedIn;
   }
 
   get type(): string {
-    return this.service.type;
+    return this.loginService.type;
   }
-  constructor(private service: LoginService, private router: Router) {
-    console.log('type: ' + this.service.type);
-    if (this.service.type !== 'customer') {
+  constructor(private loginService: LoginService, private router: Router, private api: ApiService) {
+    console.log('type: ' + this.loginService.type);
+    if (this.loginService.type !== 'customer') {
       this.router.navigateByUrl('/invalidCredentials');
   }}
 
   ngOnInit() {
   }
   logout() {
-    this.service.logOut(this.router);
+    this.loginService.logOut(this.router);
   }
 }
