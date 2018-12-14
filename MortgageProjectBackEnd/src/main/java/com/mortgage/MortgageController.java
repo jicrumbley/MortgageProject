@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,9 @@ public class MortgageController {
 	
 	@Autowired
 	UserDao ud;
+	
+	@Autowired
+	EmployeeDao ed;
 	
 	//Customer Request Mappings
 	
@@ -35,11 +39,19 @@ public class MortgageController {
 		return cd.delete(c);
 	}
 	
-	@PostMapping("/getAllCustomers")
+	@GetMapping("/getAllCustomers")
 	@ResponseBody
 	public List<Customer> getCustomers()
 	{
 		return cd.getAllCustomers();
+	}
+	
+	//Employee Request Mappings
+	@GetMapping("/getAllEmployees")
+	@ResponseBody
+	public List<Employee> getEmployees()
+	{
+		return ed.getAllEmployees();
 	}
 	
 	//User Request Mappings

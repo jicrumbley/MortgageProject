@@ -12,16 +12,24 @@ public class Employee extends User {
 	
 	private List<Report> repList;
 	
+	private boolean active;
+	
 	public Employee(String username, String password, int eid, String role, String fname, String lname) {
 		super(username, password);
 		this.eid = eid;
 		this.role = role;
 		this.fname = fname;
 		this.lname = lname;
+		this.active = true;
 	}
 
 	public Employee(String username, String password) {
 		super(username, password);
+	}
+	
+	public Employee()
+	{
+		
 	}
 
 	public int getEid() {
@@ -54,6 +62,22 @@ public class Employee extends User {
 
 	public void setLname(String lname) {
 		this.lname = lname;
+	}
+
+	public List<Report> getRepList() {
+		return repList;
+	}
+
+	public void setRepList(List<Report> repList) {
+		this.repList = repList;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 	
