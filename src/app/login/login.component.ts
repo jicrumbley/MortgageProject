@@ -4,6 +4,7 @@ import { LoginService } from '../login.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ApiService } from '../api/api.service';
 import { Customer } from '../Models/Customer';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   _loggedIn = false;
   _type: string;
   registerView = false;
+
 
   loginForm = new FormGroup({
     username: new FormControl(''),
@@ -40,8 +42,9 @@ export class LoginComponent implements OnInit {
     return this.service.type;
   }
 
-
-  constructor(private router: Router, private service: LoginService, private api: ApiService) { }
+  constructor(private router: Router, private service: LoginService, private api: ApiService) { 
+    api.getAllCustomers();
+  }
 
   ngOnInit() {
   }
@@ -62,7 +65,7 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.value.password;
   }
 
-  passwordCheck(): boolean {
+  checkIfPasswordsAreEqual(): boolean {
     if (this.registerForm.value.password === this.registerForm.value.passwordConfirm) {
       return true;
     }
@@ -79,9 +82,13 @@ export class LoginComponent implements OnInit {
       "lname": this.registerForm.value.lname,
       "dob": this.registerForm.value.dob,
       "phone": this.registerForm.value.phone
-    })
+    });
 
     this.api.addCustomer(newCustomer);
+    
+  }
+
+  checkIfUsernameExists() {
 
   }
   // check if login is correct
