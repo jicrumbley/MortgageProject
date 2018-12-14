@@ -1,4 +1,5 @@
 import { Customer } from 'src/app/Models/Customer';
+import { Observable } from 'rxjs';
 
 export interface CustomerAPI {
     getCustomerUrl: string;
@@ -7,7 +8,7 @@ export interface CustomerAPI {
     updateCustomerUrl: string;
     getAllCustomersUrl: string;
 
-    getAllCustomers(): Customer[];
+    getAllCustomers(): Observable<Customer[]>;
     getCustomer(customer: Customer): Customer;
     addCustomer(customer: Customer): number;
     deleteCustomer(customer: Customer): number;

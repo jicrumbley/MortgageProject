@@ -3,6 +3,10 @@ import { CustomerAPI } from '../apiInterfaces/customerAPI';
 import { Customer } from 'src/app/Models/Customer';
 import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+// import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 // import 'rxjs/add/operator/map';
 
 @Injectable({
@@ -41,18 +45,19 @@ export class CustomerAPIImplService implements CustomerAPI {
   //     .set('Content-Type', 'application/json');
   //   return this.http.post('/api/contacts/delete', JSON.stringify(contact), { headers }).subscribe();
   // }
-  getAllCustomers(): Customer[] {
-    return this.http.get<Customer[]>(this.getAllCustomersUrl).map(item => {
-      return new Customer(
-        item.username,
-        item.password,
-        item.ssn,
-        item.fname,
-        item.lname,
-        item.date,
-        item.phone
-      );
-    });
+  getAllCustomers(): Observable<Customer[]> {
+    return this.http.get(this.getAllCustomersUrl).pipe(map(res => res as Customer[]));
+    // .map(item => {
+    //   return new Customer(
+    //     item.username,
+    //     item.password,
+    //     item.ssn,
+    //     item.fname,
+    //     item.lname,
+    //     item.date,
+    //     item.phone
+    //   );
+    // });
 
     // subscribe(data => { this.notes = data; });
   }

@@ -8,6 +8,12 @@ import { ReportAPIImplService } from './apiImpl/report-apiimpl.service';
 import { Employee } from '../Models/Employee';
 import { Report } from '../Models/Report';
 import { Loan } from '../Models/Loan';
+// import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+// import 'rxjs/add/operator/map';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +25,16 @@ export class ApiService {
     private employeeService: EmployeeAPIImplService, private loanService: LoanAPIImplService,
     private reportService: ReportAPIImplService) { }
 
+  // private extractData(res: Response) {
+  //   if (res.status < 200 || res.status >= 300) {
+  //     throw new Error('Bad response status: ' + res.status);
+  //   }
+  //   const body = res.json();
+  //   return body.data || {};
+  // }
+
   // CUSTOMER
-  getAllCustomers() {
+  getAllCustomers(): Customer[] {
     return this.customerService.getAllCustomers();
   }
   getCustomer(customer: Customer): Customer {
