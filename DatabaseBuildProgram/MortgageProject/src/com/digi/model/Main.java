@@ -23,9 +23,11 @@ public class Main {
 		
 		Customer c = new Customer("test", "test123", 234432345, "Tom", "Test", "05-05-1970", "555-555-5555", "ttest@gmail.com");
 		Employee e = new Employee("admin", "admin", 001, "admin", "Billy", "Boss");
+		Employee e1 = new Employee("will@gmail.com", "pass123", 002, "io", "Will", "Williams");
 		
 		s.persist(c);
 		s.persist(e);
+		s.persist(e1);
 		
 		Loan l = new Loan(c, 200000.00, 15000.00, "123 Road Way", "apartment", "Self-Employed");
 		
