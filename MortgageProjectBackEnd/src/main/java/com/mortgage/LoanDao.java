@@ -1,4 +1,4 @@
-package com.mortgage;
+package com.mortgage.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.mortgage.model.Customer;
+import com.mortgage.model.Employee;
 import com.mortgage.model.Loan;
 
 @Repository
@@ -53,4 +54,28 @@ public class LoanDao {
 		}
 		return lList;
 	}
+	public Loan getLoanById(int loanId) {
+		Loan loan = null;
+		try {
+			jdbc.query("select * from mortgageloan where loanId =" + loanId, new RowMapper<Loan>() {
+			@Override
+			public Loan mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Loan l = new Loan();
+				l.setLoanId(rs.getInt(1));
+				l.setApprovedAmount(rs.getFloat(2));
+				l.setAskedAmount(rs.getFloat(3));
+				l.setDownPayment(rs.getFloat(4));
+				l.setLocation(rs.getString(5));
+				l.setProofOfIncome(rs.getString(6));
+				l.setPropertyType(rs.getString(7));
+				l.setCust(cd.getCustomerBySsn(rs.getInt(8)));
+				
+				return l;
+				}
+			});
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		return loan;
+		}
 }
