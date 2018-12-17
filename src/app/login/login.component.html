@@ -36,7 +36,7 @@
       <!-- <mat-tab-group dynamicHeight min-height="800px">
           <mat-tab label="Login"> -->
       <div class="example-small-box mat-elevation-z4">
-        <form *ngIf="!registerView" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" method="POST">
+        <form [@simpleFadeAnimation]="'in'" *ngIf="!registerView" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" method="POST">
           <h6 style="text-align: center">Login</h6>
           <div class="form-group">
             <label for="username">Email</label>
@@ -50,7 +50,7 @@
           <button type="submit" class="btn btn-success">Login</button>
         </form>
 
-        <form *ngIf="registerView" [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()" method="POST">
+        <form [@simpleFadeAnimation]="'in'" *ngIf="registerView" [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()" method="POST">
           <h6 style="text-align: center">Register</h6>
           <div class="form-group">
             <label for="username">Username</label>

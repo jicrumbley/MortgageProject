@@ -20,15 +20,23 @@ import 'rxjs/add/operator/catch';
 })
 export class ApiService {
   static port = 8090;
-  customers: Customer[] = [];
+
   constructor(private http: HttpClient, private customerService: CustomerAPIImplService,
     private employeeService: EmployeeAPIImplService, private loanService: LoanAPIImplService,
     private reportService: ReportAPIImplService) { }
 
+  // private extractData(res: Response) {
+  //   if (res.status < 200 || res.status >= 300) {
+  //     throw new Error('Bad response status: ' + res.status);
+  //   }
+  //   const body = res.json();
+  //   return body.data || {};
+  // }
+
   // CUSTOMER
-  getAllCustomers(): Customer[] {
-     this.customers = this.customerService.getAllCustomers();
-     return this.customers;
+  getAllCustomers() {
+    console.log(this.customerService.getAllCustomers());
+    return this.customerService.getAllCustomers();
   }
   getCustomer(customer: Customer): Customer {
     return this.customerService.getCustomer(customer);

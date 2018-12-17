@@ -4,19 +4,38 @@ import { LoginService } from '../login.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ApiService } from '../api/api.service';
 import { Customer } from '../Models/Customer';
-import * as $ from 'jquery';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  animations: [
+    // the fade-in/fade-out animation.
+    trigger('simpleFadeAnimation', [
+      state('in', style({opacity: 1})),
+      // fade in when created. this could also be written as transition('void => *')
+      transition(':enter', [
+        style({opacity: 0}),
+        animate(600)
+      ]),
+      // fade out when destroyed. this could also be written as transition('void => *')
+      transition(':leave',
+        animate(0, style({opacity: 0})))
+    ])
+  ]
 })
 export class LoginComponent implements OnInit {
   _loggedIn = false;
   _type: string;
   registerView = false;
-
 
   loginForm = new FormGroup({
     username: new FormControl(''),
@@ -42,9 +61,8 @@ export class LoginComponent implements OnInit {
     return this.service.type;
   }
 
-  constructor(private router: Router, private service: LoginService, private api: ApiService) { 
-    api.getAllCustomers();
-  }
+
+  constructor(private router: Router, private service: LoginService, private api: ApiService) { }
 
   ngOnInit() {
   }
@@ -65,7 +83,7 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.value.password;
   }
 
-  checkIfPasswordsAreEqual(): boolean {
+  passwordCheck(): boolean {
     if (this.registerForm.value.password === this.registerForm.value.passwordConfirm) {
       return true;
     }
@@ -82,13 +100,9 @@ export class LoginComponent implements OnInit {
       "lname": this.registerForm.value.lname,
       "dob": this.registerForm.value.dob,
       "phone": this.registerForm.value.phone
-    });
+    })
 
     this.api.addCustomer(newCustomer);
-    
-  }
-
-  checkIfUsernameExists() {
 
   }
   // check if login is correct

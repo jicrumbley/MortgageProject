@@ -1,6 +1,4 @@
 import { Customer } from 'src/app/Models/Customer';
-import { Observable } from 'rxjs';
-
 export interface CustomerAPI {
     getCustomerUrl: string;
     addCustomerUrl: string;

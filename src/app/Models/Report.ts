@@ -1,10 +1,14 @@
-import { Loan } from './Loan';
 import { Employee } from './Employee';
 
 export class Report {
     loanId: number;
     inspectionOfficerId: number;
-    // e: Employee;
-    // l: Loan;
+    // emp: Employee;
     reportData: string;
+    constructor(jsonResponse: any) {
+        this.loanId = jsonResponse.eid;
+        this.inspectionOfficerId = jsonResponse.role;
+        this.reportData = jsonResponse.fname;
+        // this.emp = jsonResponse.emp;
+    }
 }
