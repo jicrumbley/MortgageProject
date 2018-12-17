@@ -32,9 +32,5 @@ export class LoginService {
     router.navigateByUrl('/');
   }
 
-  register() {
-    
-  }
-
 }
 

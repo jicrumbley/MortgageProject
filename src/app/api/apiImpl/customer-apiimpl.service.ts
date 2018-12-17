@@ -3,8 +3,6 @@ import { CustomerAPI } from '../apiInterfaces/customerAPI';
 import { Customer } from 'src/app/Models/Customer';
 import { ApiService } from '../api.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
 // import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 // import 'rxjs/add/operator/map';
