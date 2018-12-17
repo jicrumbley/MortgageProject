@@ -1,4 +1,4 @@
-package com.mortgage.dao;
+package com.mortgage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
