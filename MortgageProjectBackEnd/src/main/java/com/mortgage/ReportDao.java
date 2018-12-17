@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -16,11 +17,18 @@ public class ReportDao {
 	@Autowired
 	JdbcTemplate jdbc;
 	
+	@Lazy
 	@Autowired
-	EmployeeDao ed = new EmployeeDao();
+	EmployeeDao ed;
 	
+	@Lazy
 	@Autowired
-	LoanDao ld = new LoanDao();
+	LoanDao ld;
+	
+	public ReportDao()
+	{
+		
+	}
 	
 	public List<Report> getAllReports() {
 		List<Report> rList;
@@ -29,14 +37,10 @@ public class ReportDao {
 				@Override
 				public Report mapRow(ResultSet rs, int rowNum) throws SQLException {
 					Report r = new Report();
-					Employee e = new Employee();
-					Loan l = new Loan();
-					e = ed.getEmployeeById(e.getEid());
-					l = ld.getLoanById(l.getLoanId());
+					
 					r.setReportId(rs.getInt(1));
 					r.setReportData(rs.getString(2));
-					r.setE(e);
-					r.setL(l);
+					r.setE(ed.getEmployeeById(rs.getInt(3)));
 					
 					return r;
 				}
@@ -48,21 +52,20 @@ public class ReportDao {
 		}
 		return rList;
 	}
-	public List<Report> getReportById(int reportId, int eId, int loanId) {
+	public Report getReportById(Integer reportId) {
+		if(reportId == null)
+			return null;
+		
 		List<Report> rList;
 		try {
 			rList = jdbc.query("select * from mortgagereport where reportId =" + reportId, new RowMapper<Report>() {
 				@Override
 				public Report mapRow(ResultSet rs, int rowNum) throws SQLException {
 					Report r = new Report();
-					Employee e = new Employee();
-					Loan l = new Loan();
-					e = ed.getEmployeeById(e.getEid());
-					l = ld.getLoanById(l.getLoanId());
+					
 					r.setReportId(rs.getInt(1));
 					r.setReportData(rs.getString(2));
-					r.setE(e);
-					r.setL(l);
+					r.setE(ed.getEmployeeById(rs.getInt(3)));
 					
 					return r;
 				}
@@ -72,6 +75,7 @@ public class ReportDao {
 			System.out.println(e.getMessage());
 			rList = null;
 		}
-		return rList;
+		System.out.println("-------------" + rList.get(0).getReportId());
+		return rList.get(0);
 	}
 }

@@ -1,5 +1,7 @@
-package com.mortgage;
+package com.mortgage.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mortgage.model.Customer;
 import com.mortgage.model.Employee;
+
 
 @Repository
 public class EmployeeDao {
@@ -83,10 +86,11 @@ public class EmployeeDao {
 		}
 		return ret;
 	}
+	
 	public Employee getEmployeeById(int eId) {
-		List<Employee> employee = null;
+		Employee employee = null;
 		try {
-			employee = jdbc.query("select * from mortgageemployee where eId =" + eId, new RowMapper<Employee>() {
+			jdbc.query("select * from mortgageemployee where eId =" + eId, new RowMapper<Employee>() {
 			@Override
 			public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Employee e = new Employee();
@@ -102,6 +106,6 @@ public class EmployeeDao {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			return employee.get(0);
+			return employee;
 		}
-}
+	}

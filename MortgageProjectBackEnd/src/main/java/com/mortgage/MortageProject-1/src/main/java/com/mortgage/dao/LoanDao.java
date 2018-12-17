@@ -1,16 +1,16 @@
-package com.mortgage;
+package com.mortgage.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.mortgage.model.Customer;
+import com.mortgage.model.Employee;
 import com.mortgage.model.Loan;
 
 @Repository
@@ -19,13 +19,8 @@ public class LoanDao {
 	@Autowired
 	JdbcTemplate jdbc;
 	
-	@Lazy
 	@Autowired
 	CustomerDao cd;
-	
-	@Lazy
-	@Autowired
-	ReportDao rd;
 	
 	public LoanDao()
 	{
@@ -49,23 +44,20 @@ public class LoanDao {
 					l.setPropertyType(rs.getString(7));
 					l.setCust(cd.getCustomerBySsn(rs.getInt(8)));
 					
-					if(rs.getInt(9) != 0)
-						l.setRep(rd.getReportById(rs.getInt(9)));
 					return l;
 				}
 			});
 		}catch(Exception e)
 		{
-			System.out.println("Error ------");
 			System.out.println(e.getMessage());
 			lList = null;
 		}
 		return lList;
 	}
 	public Loan getLoanById(int loanId) {
-		List<Loan> loan = null;
+		Loan loan = null;
 		try {
-			loan = jdbc.query("select * from mortgageloan where loanId =" + loanId, new RowMapper<Loan>() {
+			jdbc.query("select * from mortgageloan where loanId =" + loanId, new RowMapper<Loan>() {
 			@Override
 			public Loan mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Loan l = new Loan();
@@ -77,13 +69,13 @@ public class LoanDao {
 				l.setProofOfIncome(rs.getString(6));
 				l.setPropertyType(rs.getString(7));
 				l.setCust(cd.getCustomerBySsn(rs.getInt(8)));
-				l.setRep(rd.getReportById(rs.getInt(9)));
+				
 				return l;
 				}
 			});
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-		return loan.get(0);
+		return loan;
 		}
 }

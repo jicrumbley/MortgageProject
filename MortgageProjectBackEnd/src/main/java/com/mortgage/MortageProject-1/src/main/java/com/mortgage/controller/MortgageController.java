@@ -1,4 +1,4 @@
-package com.mortgage;
+package com.mortgage.controller;
 
 import java.util.List;
 
@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mortgage.model.*; 
+import com.mortgage.dao.*;
+import com.mortgage.model.*;
 
 @Controller
 public class MortgageController {
@@ -25,9 +26,6 @@ public class MortgageController {
 	
 	@Autowired
 	LoanDao ld;
-	
-	@Autowired
-	ReportDao rd;
 	
 	//Customer Request Mappings
 	
@@ -104,12 +102,5 @@ public class MortgageController {
 	public List<Loan> getAllLoans()
 	{
 		return ld.getAllLoans();
-	}
-	
-	@GetMapping("/getReportById")
-	@ResponseBody
-	public Report getRepById()
-	{
-		return rd.getReportById(13);
 	}
 }
