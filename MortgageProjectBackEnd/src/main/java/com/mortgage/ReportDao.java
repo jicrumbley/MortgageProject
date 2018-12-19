@@ -53,7 +53,7 @@ public class ReportDao {
 		return rList;
 	}
 	public Report getReportById(Integer reportId) {
-		if(reportId == null)
+		if(reportId == 0)
 			return null;
 		
 		List<Report> rList;
@@ -75,7 +75,13 @@ public class ReportDao {
 			System.out.println(e.getMessage());
 			rList = null;
 		}
-		System.out.println("-------------" + rList.get(0).getReportId());
+		
 		return rList.get(0);
+	}
+	
+	public void newReport(Report r)
+	{
+		jdbc.execute("insert into mortgagereport values (mortrep_seq.nextval, '', "+ r.getE().getEid() + "," + r.getL().getLoanId() + ")");
+		jdbc.execute("update mortgageloan set reportId = mortrep_seq.currval where loanId = " + r.getL().getLoanId());
 	}
 }

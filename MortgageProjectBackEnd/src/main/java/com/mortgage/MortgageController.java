@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mortgage.model.*; 
+import com.mortgage.model.*;
+
+import oracle.jdbc.proxy.annotation.Post; 
 
 @Controller
 public class MortgageController {
@@ -54,9 +56,9 @@ public class MortgageController {
 	
 	@GetMapping("/getCustBySsn")
 	@ResponseBody
-	public Customer getCustBySsn()
+	public Customer getCustBySsn(@RequestBody Customer cust)
 	{
-		return cd.getCustomerBySsn(234432345);
+		return cd.getCustomerBySsn(cust.getSsn());
 	}
 	
 	//Employee Request Mappings
@@ -106,10 +108,41 @@ public class MortgageController {
 		return ld.getAllLoans();
 	}
 	
+	@GetMapping("/getLoanByEmp")
+	@ResponseBody
+	public List<Loan> getLoanByEmp(@RequestBody Employee e)
+	{
+		System.out.println(e.getEid());
+		return ld.getLoanByEmployee(e.getEid());
+	}
+	
+	@GetMapping("/getLoanByCust")
+	@ResponseBody
+	public Loan getLoanByCust(@RequestBody Customer cust)
+	{
+		return ld.getLoanByCust(cust.getSsn());
+	}
+	
+	@PostMapping("/setApprovedAmount")
+	@ResponseBody
+	public void updateApprovedAmount(@RequestBody Loan l)
+	{
+		ld.updateApprovedAmout(l);
+	}
+	
+	//Report Request Mappings
+	
 	@GetMapping("/getReportById")
 	@ResponseBody
 	public Report getRepById()
 	{
 		return rd.getReportById(13);
+	}
+	
+	@PostMapping("/addReport")
+	@ResponseBody
+	public void addReport(@RequestBody Report r)
+	{
+		rd.newReport(r);
 	}
 }
