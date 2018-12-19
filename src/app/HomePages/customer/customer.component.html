@@ -26,6 +26,15 @@
            margin: 5%;
   
         } 
+         .my-flex-item2 {
+          height: 100%; 
+           /* border: darkgray 1px solid;  */
+           /* background-color: lightgrey;  */
+           height: 1000px; 
+           width: 1000px;
+           margin: 5%;
+  
+        } 
     </style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="" disabled>Navbar</a>
@@ -72,10 +81,22 @@
 Logged in: {{loggedIn}} <br>
 As type: {{type}}<br>
 <button data-toggle="modal" data-target="#logoutModal">Log out</button>
+<!-- <div class="container">
+    <div class="d-flex flex-row justify-content-center my-flex-container2">
+      <div class="p-2 my-flex-item2" style="margin-right: 5%;">
+        <button type="button" class="btn btn-primary btn-lg" (click)='showLoansView = true'>View My Loans</button>
+      </div>
+      <div class="p-2 my-flex-item2">
+        <button type="button" class="btn btn-secondary btn-lg" (click)='applyView = false'>Apply For a New Loan</button>
+      </div>
+    </div>
+  </div>
+-->
+<div class="container"> 
 
-<div class="container">
+
   <div class="d-flex flex-row justify-content-around my-flex-container">
-    <div class="p-2 my-flex-item" style="width: 50%">
+    <div [@simpleFadeAnimation]="'in'" class="p-2 my-flex-item" style="width: 50%">
 
       <h2>Your Loans</h2>
 
@@ -99,42 +120,33 @@ As type: {{type}}<br>
     location: new FormControl(''),
     propertyType: new FormControl(''),
     proofOfIncome: new FormControl(''), -->
-    <div [@simpleFadeAnimation]="'in'" class="p-2 my-flex-item" style="width: 50%">
+    <div [@simpleFadeAnimation]="'in'" class="p-2 my-flex-item" style="width: 50%" >
       <div class="example-small-box mat-elevation-z4">
-        <form  [formGroup]="loanForm" (ngSubmit)="submit()" method="POST">
-          <h2 >Apply for a Loan</h2>
+        <form [formGroup]="loanForm" (ngSubmit)="submit()" method="POST">
+          <h2> Apply for a Loan</h2>
           <div class="form-group">
-            <label for="username">Username</label>
-            <input type="email" class="form-control" formControlName="username" id="username" required>
+            <label for="askedAmount">How much of a loan do you want?</label>
+            <input type="number" class="form-control" formControlName="askedAmount" id="askedAmount" required>
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" formControlName="password" id="password" required>
+            <label for="downPayment">Down Payment willing to provide: </label>
+            <input type="number" class="form-control" formControlName="downPayment" id="downPayment" required>
           </div>
           <div class="form-group">
-            <label for="passwordConfirm">Confirm password</label>
-            <input type="password" class="form-control" formControlName="passwordConfirm" id="passwordConfirm" required>
+            <label for="location">Your location: </label>
+            <input type="text" class="form-control" formControlName="location" id="location" required>
           </div>
           <div class="form-group">
-            <label for="ssn">Social Security Number</label>
-            <input type="number" class="form-control" formControlName="ssn" id="ssn" required>
+            <label>Property Type:</label>
+            House: <input type="radio" name="propertyType" checked value=house formControlName="propertyType">
+            Apartment: <input type="radio" name="propertyType" checked value=apartment formControlName="propertyType">
+            Condo: <input type="radio" name="propertyType" checked value=condo formControlName="propertyType">
           </div>
           <div class="form-group">
-            <label for="fname">First Name</label>
-            <input type="text" class="form-control" formControlName="fname" id="fname" required>
+            <label for="proofOfIncome">Proof of Income</label>
+            <input type="text" class="form-control" formControlName="proofOfIncome" id="proofOfIncome" required>
           </div>
-          <div class="form-group">
-            <label for="lname">Last Name</label>
-            <input type="text" class="form-control" formControlName="lname" id="lname" required>
-          </div>
-          <div class="form-group">
-            <label for="datePicker">Date of birth</label>
-            <input type="date" class="form-control" formControlName="datePicker" id="datePicker" required>
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="phone" class="form-control" formControlName="phone" id="phone" required>
-          </div>
+
           <button type="submit" class="btn btn-success">Register</button>
         </form>
 
