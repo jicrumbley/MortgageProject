@@ -69,11 +69,11 @@ export class ApiService {
   getAllLoans(): Loan[] {
     return this.loanService.getAllLoans();
   }
-  getLoanByCust(loan: Loan): Loan {
-    return this.loanService.getLoanByCust(loan);
+  getLoanByCust(cust: Customer): Loan {
+    return this.loanService.getLoanByCust(cust);
   }
-  getLoanByEmp(loan: Loan): Loan {
-    return this.loanService.getLoanByEmp(loan);
+  getLoanByEmp(emp: Employee): Loan[] {
+    return this.loanService.getLoanByEmp(emp);
   }
   addLoan(loan: Loan): number {
     return this.loanService.addLoan(loan);
