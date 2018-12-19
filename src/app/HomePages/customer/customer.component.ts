@@ -120,8 +120,7 @@ export class CustomerComponent implements OnInit {
       "location": this.loanForm.value.location,
       "propertyType": this.loanForm.value.propertyType,
       "proofOfIncome": this.loanForm.value.proofOfIncome,
-      "cust": "",
-      "rep": "",
+      "cust": this.api.getCurrentUser(),
       "status": "pending"
     });
 

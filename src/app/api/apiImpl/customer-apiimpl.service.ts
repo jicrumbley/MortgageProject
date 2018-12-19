@@ -19,6 +19,7 @@ export class CustomerAPIImplService implements CustomerAPI {
   deleteCustomerUrl = 'http://localhost:' + ApiService.port + '/deleteCustomer';
   updateCustomerUrl = 'http://localhost:' + ApiService.port + '/...';
   getAllCustomersUrl = 'http://localhost:' + ApiService.port + '/getAllCustomers';
+  getCustomerByEmailUrl = 'http://localhost:' + ApiService.port + '/getCustByEmail';
 
 
   //  // CUSTOMER
@@ -67,6 +68,12 @@ export class CustomerAPIImplService implements CustomerAPI {
     return customer;
   }
 
+  getCustomerByEmail(email: string): Customer {
+    let cust: Customer;
+    this.http.get(this.getCustomerByEmailUrl).subscribe((res: any) => { cust = new Customer(res); });
+    return cust;
+  }
+
   // register
   addCustomer(customer: Customer): number {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -78,10 +85,10 @@ export class CustomerAPIImplService implements CustomerAPI {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.http.post(this.addCustomerUrl, JSON.stringify(customer), { headers }).subscribe();
     return 1;
-    }
+  }
 
   updateCustomer(customer: Customer): number {
     return null;
   }
-  
+
 }

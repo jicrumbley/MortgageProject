@@ -22,6 +22,28 @@ public class CustomerDao {
 	{
 		
 	}
+
+	public Customer getCustomerByEmail(String username)
+	{
+		Customer c = null;
+		try {
+			SqlRowSet rs = jdbc.queryForRowSet("select * from mortgagecustomer where email like '" + username + "'");
+			c = new Customer();
+			rs.first();
+			c.setDob(rs.getString(1));
+			c.setEmail(rs.getString(2));
+			c.setFname(rs.getString(3));
+			c.setLname(rs.getString(4));
+			c.setPhone(rs.getString(5));
+			c.setSsn(rs.getInt(6));
+			c.setUsername(rs.getString(7));
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			c = null;
+		}
+		return c;
+	}
 	
 	
 	public Customer getCustomerBySsn(int ssn)

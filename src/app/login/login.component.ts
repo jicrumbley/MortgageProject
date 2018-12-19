@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
   _loggedIn = false;
   _type: string;
   registerView = false;
+  currentCustomer: Customer;
+
 
   loginForm = new FormGroup({
     username: new FormControl(''),
@@ -81,6 +83,8 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value);
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
+    const type = this.api.checkLogin(username, password);
+
   }
 
   passwordCheck(): boolean {
@@ -100,7 +104,7 @@ export class LoginComponent implements OnInit {
       "lname": this.registerForm.value.lname,
       "dob": this.registerForm.value.dob,
       "phone": this.registerForm.value.phone
-    })
+    });
 
     this.api.addCustomer(newCustomer);
 

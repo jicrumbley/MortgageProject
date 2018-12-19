@@ -66,6 +66,13 @@ public class MortgageController {
 		return cd.getCustomerBySsn(cust.getSsn());
 	}
 	
+	@GetMapping("/getCustByEmail")
+	@ResponseBody
+	public Customer getCustByEmail(@RequestBody Customer cust)
+	{
+		return cd.getCustomerByEmail(cust.getUsername());
+	}
+	
 	//Employee Request Mappings
 	
 	@GetMapping("/getAllEmployees")

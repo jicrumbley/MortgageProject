@@ -8,6 +8,7 @@ import { ReportAPIImplService } from './apiImpl/report-apiimpl.service';
 import { Employee } from '../Models/Employee';
 import { Report } from '../Models/Report';
 import { Loan } from '../Models/Loan';
+import { forEach } from '@angular/router/src/utils/collection';
 // import { map } from 'rxjs/operators';
 // import 'rxjs/add/operator/map';
 
@@ -17,10 +18,13 @@ import { Loan } from '../Models/Loan';
 })
 export class ApiService {
   static port = 8090;
-
+  currentUser: any = null;
+  allCustomers: Customer[] = [];
   constructor(private http: HttpClient, private customerService: CustomerAPIImplService,
     private employeeService: EmployeeAPIImplService, private loanService: LoanAPIImplService,
-    private reportService: ReportAPIImplService) { }
+    private reportService: ReportAPIImplService) {
+    this.allCustomers = this.getAllCustomers();
+  }
 
   // private extractData(res: Response) {
   //   if (res.status < 200 || res.status >= 300) {
@@ -29,6 +33,35 @@ export class ApiService {
   //   const body = res.json();
   //   return body.data || {};
   // }
+  // CHECK LOGIN
+  checkLogin(username: string, password: string): string {
+    let type: string = 'invalid';
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    this.http.post("http://localhost" + ApiService.port + "/login",
+      "{'username': " + username
+      + ", 'password: " + password + "}",
+      { headers }).subscribe((res: any) => { type = res });
+
+    //check if failure
+    if (type === 'invalid') {
+      return type;
+    }
+
+
+    //assign currentUser
+    if (type === 'customer') {
+      this.currentUser = this.customerService.getCustomerByEmail(username);
+    }
+
+
+    return type;
+  }
+
+  getCurrentUser() {
+    return this.currentUser;
+  }
+
 
   // CUSTOMER
   getAllCustomers() {

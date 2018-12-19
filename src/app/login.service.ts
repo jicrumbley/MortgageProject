@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { longStackSupport } from 'q';
 import { Router } from '@angular/router';
+import { Customer } from './Models/Customer';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { Router } from '@angular/router';
 export class LoginService {
   _loggedIn = false;
   type: string;
+  currentCustomer: Customer;
   constructor() { }
 
   logIn(type: string, router: Router): boolean {
