@@ -72,9 +72,12 @@ export class LoanAPIImplService implements LoanAPI {
     return null;
   }
   statusLoan(loan: Loan): number {
-    return null;
+    this.http.post(this.statusLoanUrl, JSON.stringify(loan)).subscribe();
+    return 1;
   }
   approvedAmountLoan(loan: Loan): number {
-    return null;
+    this.http.post(this.approvedAmountLoanUrl, JSON.stringify(loan)).subscribe();
+
+    return 1;
   }
 }
