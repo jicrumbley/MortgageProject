@@ -59,10 +59,10 @@ export class ApiService {
     return this.employeeService.addEmployee(employee);
   }
   deleteEmployee(employee: Employee): number {
-    return this.employeeService.deleteEmployee(employee);
+    return this.employeeService.inactiveEmployee(employee);
   }
   updateEmployee(employee: Employee): number {
-    return this.employeeService.updateEmployee(employee);
+    return this.employeeService.activeEmployee(employee);
   }
 
   // LOAN
