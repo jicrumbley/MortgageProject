@@ -11,7 +11,7 @@ public class Loan {
 	private int loanId;
 	
 	@OneToOne
-	@JoinColumn(name = "reportId", referencedColumnName = "reportId")
+	@JoinColumn(name = "reportId", referencedColumnName = "reportId", nullable=true)
 	private Report rep;
 	
 	@OneToOne
@@ -25,6 +25,8 @@ public class Loan {
 	private String location;
 	private String propertyType;
 	private String proofOfIncome;
+	
+	private String status;
 	
 	public Loan(Customer cust, double askedAmount, double downPayment,
 			String location, String propertyType, String proofOfIncome) {
@@ -112,6 +114,14 @@ public class Loan {
 
 	public void setRep(Report rep) {
 		this.rep = rep;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

@@ -2,6 +2,7 @@ package com.digi.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -9,6 +10,7 @@ import javax.persistence.Table;
 @Table(name="mortgagecustomer")
 @PrimaryKeyJoinColumn(name="username")
 public class Customer extends User {
+	
 	
 	private int ssn;
 	private String fname;

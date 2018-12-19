@@ -107,7 +107,7 @@ public class MortgageController {
 	
 	@PostMapping("/addLoan")
 	@ResponseBody
-	public int addLoan(Loan l)
+	public int addLoan(@RequestBody Loan l)
 	{
 		return ld.addLoan(l);
 	}

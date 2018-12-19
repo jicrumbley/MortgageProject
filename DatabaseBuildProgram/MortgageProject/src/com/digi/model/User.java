@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class User {
 	
 	@Id
-	private String username;
+	private String username = "Test";
 	private String password;
 	private String type;
 	
@@ -50,7 +50,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 	
 	
 }

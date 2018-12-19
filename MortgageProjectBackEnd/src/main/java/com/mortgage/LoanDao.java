@@ -37,11 +37,12 @@ public class LoanDao {
 	{
 		int ret = 0;
 		try {
-			ret = jdbc.update("insert into mortgageloan values (mortloan_seq.nextval, 0, " + l.getAskedAmount() + ", " + l.getDownPayment() + ", '" +
-						l.getLocation() + "', '" + l.getProofOfIncome() + "', '" + l.getPropertyType() + "', " + l.getCust().getSsn() + ", 0, 'pending assignment')");
+			ret = jdbc.update("insert into mortgageloan values (mortloan_seq.nextval, 1, " + l.getAskedAmount() + ", " + l.getDownPayment() + ", '" +
+						l.getLocation() + "', '" + l.getProofOfIncome() + "', '" + l.getPropertyType() + "', 'pending assignment', " + l.getCust().getSsn() + ", null)");
 			
 		}catch(Exception e)
 		{
+			System.out.println(e.getMessage());
 			ret = -1;
 		}
 		return ret;

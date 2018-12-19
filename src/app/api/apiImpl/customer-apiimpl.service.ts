@@ -14,9 +14,9 @@ export class CustomerAPIImplService implements CustomerAPI {
 
   constructor(private http: HttpClient) { }
 
-  getCustomerUrl = 'http://localhost:' + ApiService.port + '/...';
+  getCustomerUrl = 'http://localhost:' + ApiService.port + '/getCustBySsn';
   addCustomerUrl = 'http://localhost:' + ApiService.port + '/register';
-  deleteCustomerUrl = 'http://localhost:' + ApiService.port + '/...';
+  deleteCustomerUrl = 'http://localhost:' + ApiService.port + '/deleteCustomer';
   updateCustomerUrl = 'http://localhost:' + ApiService.port + '/...';
   getAllCustomersUrl = 'http://localhost:' + ApiService.port + '/getAllCustomers';
 

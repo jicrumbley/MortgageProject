@@ -3,8 +3,5 @@ create sequence mortemp_seq increment by 1 start with 100 nomaxvalue nocycle;
 create sequence mortloan_seq increment by 1 start with 100 nomaxvalue nocycle;
 create sequence mortrep_seq increment by 1 start with 100 nomaxvalue nocycle;
 
-// run this to add the status to the employee table
-alter table mortgageloan add status varchar(100);
-
 //finally, commit it all!
 commit;
