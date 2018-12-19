@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -121,16 +123,19 @@ public class MortgageController {
 	
 	@GetMapping("/getLoanByEmp")
 	@ResponseBody
-	public List<Loan> getLoanByEmp(@RequestBody Employee e)
+	public List<Loan> getLoanByEmp(@RequestParam String eid)
 	{
-		return ld.getLoanByEmployee(e.getEid());
+		System.out.println(eid);
+		int id = Integer.parseInt(eid);
+		return ld.getLoanByEmployee(id);
 	}
 	
 	@GetMapping("/getLoanByCust")
 	@ResponseBody
-	public Loan getLoanByCust(@RequestBody Customer cust)
+	public Loan getLoanByCust(@RequestParam String ssn)
 	{
-		return ld.getLoanByCust(cust.getSsn());
+		int id = Integer.parseInt(ssn);
+		return ld.getLoanByCust(id);
 	}
 	
 	@PostMapping("/setStatus")
