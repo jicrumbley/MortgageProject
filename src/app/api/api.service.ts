@@ -69,17 +69,20 @@ export class ApiService {
   getAllLoans(): Loan[] {
     return this.loanService.getAllLoans();
   }
-  getLoan(loan: Loan): Loan {
-    return this.loanService.getLoan(loan);
+  getLoanByCust(loan: Loan): Loan {
+    return this.loanService.getLoanByCust(loan);
+  }
+  getLoanByEmp(loan: Loan): Loan {
+    return this.loanService.getLoanByEmp(loan);
   }
   addLoan(loan: Loan): number {
     return this.loanService.addLoan(loan);
   }
-  deleteLoan(loan: Loan): number {
-    return this.loanService.deleteLoan(loan);
+  statusLoan(loan: Loan): number {
+    return this.loanService.statusLoan(loan);
   }
-  updateLoan(loan: Loan): number {
-    return this.loanService.updateLoan(loan);
+  approvedAmountLoan(loan: Loan): number {
+    return this.loanService.approvedAmountLoan(loan);
   }
 
   // REPORT

@@ -1,16 +1,18 @@
 import { Loan } from 'src/app/Models/Loan';
 
 export interface LoanAPI {
-    getLoanUrl: string;
+    getLoanByCustUrl: string;
+    getLoanByEmpUrl: string;
     addLoanUrl: string;
-    deleteLoanUrl: string;
-    updateLoanUrl: string;
+    statusLoanUrl: string;
+    approvedAmountLoanUrl: string;
     getAllLoansUrl: string;
 
     getAllLoans(): Loan[];
-    getLoan(loan: Loan): Loan;
+    getLoanByCust(loan: Loan): Loan;
+    getLoanByEmp(loan: Loan): Loan;
     addLoan(loan: Loan): number;
-    deleteLoan(loan: Loan): number;
-    updateLoan(loan: Loan): number;
+    statusLoan(loan: Loan): number;
+    approvedAmountLoan(loan: Loan): number;
 }
 
