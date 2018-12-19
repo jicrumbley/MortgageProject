@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LoanAPI } from '../apiInterfaces/LoanAPI';
 import { Loan } from 'src/app/Models/Loan';
+import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../api.service';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Employee } from 'src/app/Models/Employee';
-import { Customer } from 'src/app/Models/Customer';
 
 @Injectable({
   providedIn: 'root'
@@ -69,7 +67,44 @@ export class LoanAPIImplService implements LoanAPI {
 
   }
   addLoan(loan: Loan): number {
-    return null;
+
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    // const loanJsonObj = {
+    //   "askedAmount": loan.askedAmount,
+    //   "downPayment": loan.downPayment,
+    //   "location": loan.location,
+    //   "propertyType": loan.propertyType,
+    //   "proofOfIncome": loan.proofOfIncome,
+    //   "cust":  {cu},
+    //   "rep": null,
+    //   "status": loan.status
+    // };
+    this.http.post(this.addLoanUrl, JSON.stringify(loan), { headers }).subscribe();
+    return 1;
+    // {
+    //   "rep": null,
+
+    //   "cust": {
+    //     "username": "test",
+    //     "password": null,
+    //     "ssn": 234432345,
+    //     "fname": "Tom",
+    //     "lname": "Test",
+    //     "dob": "05-05-1970",
+    //     "phone": "555-555-5555",
+    //     "email": "ttest@gmail.com",
+    //     "type": null
+    //   },
+    //   "downPayment": 2000,
+    //     "location": "ATL",
+    //     "propertyType": "house",
+    //     "proofOfIncome": "myProofOfIncome",
+    //     "status": "pending",
+    //     "askedAmount": 4000
+    // }
+
+
   }
   statusLoan(loan: Loan): number {
     this.http.post(this.statusLoanUrl, JSON.stringify(loan)).subscribe();

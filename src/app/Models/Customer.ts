@@ -6,9 +6,11 @@ export class Customer {
     public lname: string;
     public dob: Date;
     public phone: number;
+    // public jsonResponse;
 
 
     constructor(jsonResponse: any) {
+        // this.jsonResponse = jsonResponse;
         this.username = jsonResponse.username;
         this.password = jsonResponse.password;
         this.ssn = jsonResponse.ssn;
