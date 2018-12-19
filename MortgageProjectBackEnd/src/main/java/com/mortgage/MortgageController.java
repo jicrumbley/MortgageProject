@@ -120,7 +120,6 @@ public class MortgageController {
 	@ResponseBody
 	public List<Loan> getLoanByEmp(@RequestBody Employee e)
 	{
-		System.out.println(e.getEid());
 		return ld.getLoanByEmployee(e.getEid());
 	}
 	
@@ -149,9 +148,9 @@ public class MortgageController {
 	
 	@GetMapping("/getReportById")
 	@ResponseBody
-	public Report getRepById()
+	public Report getRepById(@RequestBody Report r)
 	{
-		return rd.getReportById(13);
+		return rd.getReportById(r.getReportId());
 	}
 	
 	@PostMapping("/addReport")
