@@ -1,7 +1,7 @@
 import { Report } from 'src/app/Models/Report';
 
 export interface ReportAPI {
-    getReportUrl: string;
+    getReportByIdUrl: string;
     addReportUrl: string;
     deleteReportUrl: string;
     updateReportUrl: string;
