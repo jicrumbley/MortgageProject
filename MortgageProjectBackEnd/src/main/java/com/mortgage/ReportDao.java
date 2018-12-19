@@ -84,4 +84,10 @@ public class ReportDao {
 		jdbc.execute("insert into mortgagereport values (mortrep_seq.nextval, '', "+ r.getE().getEid() + "," + r.getL().getLoanId() + ")");
 		jdbc.execute("update mortgageloan set reportId = mortrep_seq.currval where loanId = " + r.getL().getLoanId());
 	}
+	
+	public void updateReportData(Report r)
+	{
+		jdbc.execute("update mortgagereport set reportdata = '" + r.getReportData() + "' where reportId = " + r.getReportId());
+		
+	}
 }
