@@ -11,6 +11,10 @@ export class Loan {
     proofOfIncome: string;
     status: string;
 
+    // Customer cust, double askedAmount, double downPayment,
+    //         String location, String propertyType, String proofOfIncome, String status
+
+
     constructor(jsonResponse: any) {
         this.askedAmount = jsonResponse.askedAmount;
         this.downPayment = jsonResponse.downPayment;

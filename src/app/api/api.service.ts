@@ -9,9 +9,6 @@ import { Employee } from '../Models/Employee';
 import { Report } from '../Models/Report';
 import { Loan } from '../Models/Loan';
 // import { map } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 // import 'rxjs/add/operator/map';
 
 

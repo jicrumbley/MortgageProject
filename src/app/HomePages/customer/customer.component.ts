@@ -5,12 +5,31 @@ import { ApiService } from 'src/app/api/api.service';
 import { Loan } from 'src/app/Models/Loan';
 import { Customer } from 'src/app/Models/Customer';
 import { FormGroup, FormControl } from '@angular/forms';
-import { createLContainer } from '@angular/core/src/render3/instructions';
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.css']
+  styleUrls: ['./customer.component.css'],
+  animations: [
+    // the fade-in/fade-out animation.
+    trigger('simpleFadeAnimation', [
+      state('in', style({ opacity: 1 })),
+      // fade in when created. this could also be written as transition('void => *')
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate(600)
+      ]),
+      // fade out when destroyed. this could also be written as transition('void => *')
+      transition(':leave',
+        animate(0, style({ opacity: 0 })))
+    ])
+  ]
 })
 export class CustomerComponent implements OnInit {
   // Dummy data
@@ -55,6 +74,8 @@ export class CustomerComponent implements OnInit {
   _loggedIn = false;
   _type: string;
   tempLoan: Loan;
+  showLoansView = true;
+  applyView = true;
 
   get loggedIn(): boolean {
     return this.loginService._loggedIn;
@@ -103,5 +124,13 @@ export class CustomerComponent implements OnInit {
       "rep": "",
       "status": "pending"
     });
+
+    // this.api.addLoan();
+
+    // "downPayment": 2000,
+    // "location": "ATL",
+    // "propertyType": "house",
+    // "proofOfIncome": "myProofOfIncome",
+    // "status": "pending",
   }
 }
