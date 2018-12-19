@@ -101,6 +101,14 @@ public class MortgageController {
 	}
 	
 	//Loan Request Mappings
+	
+	@PostMapping("/addLoan")
+	@ResponseBody
+	public int addLoan(Loan l)
+	{
+		return ld.addLoan(l);
+	}
+	
 	@GetMapping("/getAllLoans")
 	@ResponseBody
 	public List<Loan> getAllLoans()
@@ -121,6 +129,13 @@ public class MortgageController {
 	public Loan getLoanByCust(@RequestBody Customer cust)
 	{
 		return ld.getLoanByCust(cust.getSsn());
+	}
+	
+	@PostMapping("/setStatus")
+	@ResponseBody
+	public void updateStatus(@RequestBody Loan l)
+	{
+		ld.updateStatus(l);
 	}
 	
 	@PostMapping("/setApprovedAmount")

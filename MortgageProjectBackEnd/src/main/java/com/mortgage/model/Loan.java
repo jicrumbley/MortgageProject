@@ -16,8 +16,10 @@ public class Loan {
 	private String propertyType;
 	private String proofOfIncome;
 	
+	private String status;
+	
 	public Loan(Customer cust, double askedAmount, double downPayment,
-			String location, String propertyType, String proofOfIncome) {
+			String location, String propertyType, String proofOfIncome, String status) {
 		super();
 		this.cust = cust;
 		this.askedAmount = askedAmount;
@@ -26,6 +28,7 @@ public class Loan {
 		this.location = location;
 		this.propertyType = propertyType;
 		this.proofOfIncome = proofOfIncome;
+		this.status = status;
 	}
 
 	public Loan() {
@@ -102,6 +105,14 @@ public class Loan {
 
 	public void setCust(Customer cust) {
 		this.cust = cust;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

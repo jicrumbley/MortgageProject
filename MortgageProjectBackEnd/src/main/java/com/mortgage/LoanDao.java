@@ -33,6 +33,20 @@ public class LoanDao {
 		
 	}
 	
+	public int addLoan(Loan l)
+	{
+		int ret = 0;
+		try {
+			ret = jdbc.update("insert into mortgageloan values (mortloan_seq.nextval, 0, " + l.getAskedAmount() + ", " + l.getDownPayment() + ", '" +
+						l.getLocation() + "', '" + l.getProofOfIncome() + "', '" + l.getPropertyType() + "', " + l.getCust().getSsn() + ", 0, 'pending assignment')");
+			
+		}catch(Exception e)
+		{
+			ret = -1;
+		}
+		return ret;
+	}
+	
 	public List<Loan> getAllLoans()
 	{
 		List<Loan> lList;
@@ -49,9 +63,10 @@ public class LoanDao {
 					l.setProofOfIncome(rs.getString(6));
 					l.setPropertyType(rs.getString(7));
 					l.setCust(cd.getCustomerBySsn(rs.getInt(8)));
-					
 					if(rs.getInt(9) != 0)
 						l.setRep(rd.getReportById(rs.getInt(9)));
+					l.setStatus(rs.getString(10));
+					
 					return l;
 				}
 			});
@@ -81,6 +96,8 @@ public class LoanDao {
 				
 				if(rs.getInt(9) != 0)
 					l.setRep(rd.getReportById(rs.getInt(9)));
+				l.setStatus(rs.getString(10));
+				
 				return l;
 				}
 			});
@@ -106,6 +123,7 @@ public class LoanDao {
 			l.setPropertyType(rs.getString(7));
 			if(rs.getInt(9) != 0)
 				l.setRep(rd.getReportById(rs.getInt(9)));
+			l.setStatus(rs.getString(10));
 			
 		}catch(Exception e)
 		{
@@ -134,6 +152,8 @@ public class LoanDao {
 					
 					if(rs.getInt(9) != 0)
 						l.setRep(rd.getReportById(rs.getInt(9)));
+					l.setStatus(rs.getString(10));
+					
 					return l;
 					}
 			});
@@ -151,5 +171,10 @@ public class LoanDao {
 	public void updateApprovedAmout(Loan l)
 	{
 		jdbc.execute("update mortgageloan set approvedamount = " + l.getApprovedAmount() + " where loanId = " + l.getLoanId());
+	}
+	
+	public void updateStatus(Loan l)
+	{
+		jdbc.execute("update mortgageloan set status = '" + l.getStatus() + "' where loanId = " + l.getLoanId());
 	}
 }
