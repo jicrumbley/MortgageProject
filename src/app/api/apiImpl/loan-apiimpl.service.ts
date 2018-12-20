@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { LoanAPI } from '../apiInterfaces/LoanAPI';
 import { Loan } from 'src/app/Models/Loan';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ApiService } from '../api.service';
+import { Customer } from 'src/app/Models/Customer';
+import { Employee } from 'src/app/Models/Employee';
 
 @Injectable({
   providedIn: 'root'
